@@ -11,10 +11,10 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            seasonname: '',
-            figurename: '',
-            skinname: '',
-            heightname: '',
+            seasonname: 'winter',
+            figurename: 'slim',
+            skinname: 'dark',
+            heightname: 'large',
             data: [],
             queryResponse: false
         },
@@ -50,22 +50,22 @@ class Home extends Component {
             })
             .catch(err => console.log(err));
     }
-
+    /*<Video
+                        source={require('../assets/fashion.mp4')}
+                        rate={1.0}
+                        volume={1.0}
+                        isMuted
+                        resizeMode="cover"
+                        shouldPlay
+                        isLooping
+                        style={styles.backgroundVideo}
+                    />*/
 
     render() {
         const { queryResponse, data, seasonname, figurename, skinname, heightname } = this.state;
         return (
             <SafeAreaView style={styles.container}>
-                <Video
-                    source={require('../assets/fashion.mp4')}
-                    rate={1.0}
-                    volume={1.0}
-                    isMuted={true}
-                    resizeMode="cover"
-                    shouldPlay
-                    isLooping
-                    style={styles.backgroundVideo}
-                />
+
                 <Form
                     SeasonPickerHolder={seasonname}
                     FigurePickerHolder={figurename}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: 'transparent'
+        backgroundColor: 'red'
     },
     backgroundVideo: {
         height: height,

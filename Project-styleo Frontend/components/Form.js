@@ -5,30 +5,13 @@ import {
     Text,
     TouchableOpacity,
     Dimensions,
-    Picker
+    Picker,
+    Image,
+    ScrollView
 } from 'react-native';
 
-const { Width } = Dimensions.get('window')
-/*{
-                    props.data.map((r, i) => {
-                        if (r.jeans) {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.jeans}</Text>
-                                    <Text>{r.tee}</Text>
-                                </View>)
-                        }
-                        else {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.avoid}</Text>
-                                    <Text>{r.use}</Text>
-                                    <Text>{r.optional}</Text>
-                                </View>
-                            )
-                        }
-                    }
-                    )}*/
+//const { Width } = Dimensions.get('window')
+
 function Form(props) {
     if (!props.queryResponse) {
         return (
@@ -90,18 +73,82 @@ function Form(props) {
         return (
             <View style={styles.outform}>
                 <View style={styles.comp2}>
-                    <View style={styles.comp_in}>
+                    <Image
+                        style={styles.stretch}
+                        source={require('../assets/character.png')}
+                        resizeMode='contain'
+                        resizeMethod='auto'
 
-                    </View>
+                    />
                 </View>
-                <View style={styles.comp1}>
-
-                </View>
+                <ScrollView style={styles.comp1}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ marginLeft: 13, width: '90%', backgroundColor: 'yellow', borderRadius: 25 }}
+                >
+                    {
+                        props.data.map((r, i) => {
+                            if (r.jeans) {
+                                return (
+                                    <View key={i} style={{ fontFamily: 'sans-serif' }}>
+                                        <Text style={{ fontWeight: '700' }}>
+                                            According to choice of your body structure,skin complexion and height , here are some suggestions from our side to look for.
+                                    </Text>
+                                        <Text style={{ marginTop: 5 }}>
+                                            During {r.name}, you should go for {r.tee} coloured tee's with {r.jeans} jeans.
+                                    </Text>
+                                        <Text style={{ marginTop: 18, backgroundColor: 'red', fontWeight: 'bold', fontSize: 20, fontFamily: 'Roboto' }}>What to persue :</Text>
+                                    </View>)
+                            }
+                            if (r.field == 'figure') {
+                                return (
+                                    <View key={i} style={{ backgroundColor: 'red' }} >
+                                        <Text>With your {r.name} figure, we think that {r.use} tee's might go well along with {r.avoid} on your tee.(although its optional).</Text>
+                                    </View>
+                                )
+                            }
+                            if (r.field == 'skin') {
+                                return (
+                                    <View key={i} style={{ backgroundColor: 'red' }} >
+                                        <Text>Apart from your physique, your skin complexion also plays a vital role in your dressing style.</Text>
+                                        <Text>According to your choice, we suggest you to have tee's of {r.use} and try to avoid {r.avoid} tee's.</Text>
+                                    </View>
+                                )
+                            }
+                            if (r.field == 'height') {
+                                return (
+                                    <View key={i} style={{ backgroundColor: 'red' }} >
+                                        <Text>And with your height try to have {r.use} tee and try to avoid {r.avoid} tee.</Text>
+                                    </View>
+                                )
+                            }
+                        }
+                        )}
+                </ScrollView>
             </View>
         )
     }
 
 }
+/*{
+                    props.data.map((r, i) => {
+                        if (r.jeans) {
+                            return (
+                                <View key={i}>
+                                    <Text>{r.jeans}</Text>
+                                    <Text>{r.tee}</Text>
+                                </View>)
+                        }
+                        else {
+                            return (
+                                <View key={i}>
+                                    <Text>{r.avoid}</Text>
+                                    <Text>{r.use}</Text>
+                                    <Text>{r.optional}</Text>
+                                </View>
+                            )
+                        }
+                    }
+                    )}*/
 const styles = StyleSheet.create({
     regform: {
         marginTop: '85%',
@@ -134,30 +181,39 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 700,
         flexDirection: 'row',
-        backgroundColor: "red",
+        backgroundColor: "transparent",
     },
     comp1: {
         marginTop: '30%',
         margin: 2,
-        backgroundColor: 'blue',
-        borderRadius: 25,
+        backgroundColor: 'white',
+        borderRadius: 18,
         width: '67%',
         height: '70%',
         opacity: 0.5
 
+
     },
     comp2: {
         marginTop: 5,
-        backgroundColor: 'green',
+        backgroundColor: 'transparent',
         width: '32%',
     },
     comp_in: {
-        backgroundColor: 'yellow',
+        backgroundColor: 'transparent',
         width: '90%',
         height: '30%',
         marginTop: '320%',
         marginLeft: '10%'
+    },
+    stretch: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        marginTop: 410,
+        width: 110,
+
     }
+
 })
 
 
