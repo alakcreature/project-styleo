@@ -4,17 +4,35 @@ import {
     View,
     Text,
     TouchableOpacity,
-    SafeAreaView,
     Dimensions,
     Picker
 } from 'react-native';
 
-const { width: WIDTH } = Dimensions.get('window')
-
+const { Width } = Dimensions.get('window')
+/*{
+                    props.data.map((r, i) => {
+                        if (r.jeans) {
+                            return (
+                                <View key={i}>
+                                    <Text>{r.jeans}</Text>
+                                    <Text>{r.tee}</Text>
+                                </View>)
+                        }
+                        else {
+                            return (
+                                <View key={i}>
+                                    <Text>{r.avoid}</Text>
+                                    <Text>{r.use}</Text>
+                                    <Text>{r.optional}</Text>
+                                </View>
+                            )
+                        }
+                    }
+                    )}*/
 function Form(props) {
     if (!props.queryResponse) {
         return (
-            <SafeAreaView style={styles.regform}>
+            <View style={styles.regform}>
                 <Picker
                     selectedValue={props.SeasonPickerHolder}
                     style={styles.picker}
@@ -38,7 +56,7 @@ function Form(props) {
 
                 <Picker
                     selectedValue={props.SkinPickerHolder}
-                    style={styles.picker}
+                    style={[styles.picker, { width: '70%' }]}
                     onValueChange={props.skinhandler} >
                     <Picker.Item label="Skin Complexion" value="" />
                     <Picker.Item label="Dark" value="dark" />
@@ -58,78 +76,87 @@ function Form(props) {
 
                 </Picker>
 
-                <TouchableOpacity style={styles.button} onPress={props.handleSubmit}>
-                    <Text> Move Ahead </Text>
+                <TouchableOpacity style={[styles.button, { fontWeight: 700 }]} onPress={props.handleSubmit}>
+                    <Text style={{ textAlign: 'center', fontFamily: 'sans-serif' }}> Show Me! </Text>
                 </TouchableOpacity>
 
 
 
 
-            </SafeAreaView >
+            </View >
         )
     }
     else {
         return (
-            <SafeAreaView style={styles.outform}>
-                {
-                    props.data.map((r, i) => {
-                        if (r.jeans) {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.jeans}</Text>
-                                    <Text>{r.tee}</Text>
-                                </View>)
-                        }
-                        else {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.avoid}</Text>
-                                    <Text>{r.use}</Text>
-                                    <Text>{r.optional}</Text>
-                                </View>
-                            )
-                        }
-                    }
-                    )}
-            </SafeAreaView>
+            <View style={styles.outform}>
+                <View style={styles.comp2}>
+                    <View style={styles.comp_in}>
+
+                    </View>
+                </View>
+                <View style={styles.comp1}>
+
+                </View>
+            </View>
         )
     }
 
 }
 const styles = StyleSheet.create({
     regform: {
-        flex: 1,
-
+        marginTop: '85%',
+        marginLeft: '25%',
+        width: '58%',
+        height: 340,
         backgroundColor: "transparent"
-    },
-    outform: {
-        flex: 1,
-        marginTop: 180,
-        marginBottom: 110,
-        marginLeft: 35,
-        marginRight: 30,
-        justifyContent: 'center',
-        backgroundColor: "red"
+
     },
     picker: {
-        backgroundColor: '#D3D3D3',
-        margin: 30
+        backgroundColor: 'transparent',
+        margin: 2.5,
+        width: '40%',
+        height: '55%'
     },
     button: {
-        borderRadius: 17,
-        marginLeft: 15,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderTopRightRadius: 50,
+        borderBottomRightRadius: 50,
+        marginLeft: 10,
         margin: 20,
-        width: WIDTH - 170,
-        padding: 10,
-        height: 40,
-        alignItems: 'center',
+        width: 125,
+        paddingLeft: 1,
+        height: 35,
+        justifyContent: 'center',
         backgroundColor: 'brown'
     },
-    output: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'red'
+    outform: {
+        width: '100%',
+        height: 700,
+        flexDirection: 'row',
+        backgroundColor: "red",
+    },
+    comp1: {
+        marginTop: '30%',
+        margin: 2,
+        backgroundColor: 'blue',
+        borderRadius: 25,
+        width: '67%',
+        height: '70%',
+        opacity: 0.5
 
+    },
+    comp2: {
+        marginTop: 5,
+        backgroundColor: 'green',
+        width: '32%',
+    },
+    comp_in: {
+        backgroundColor: 'yellow',
+        width: '90%',
+        height: '30%',
+        marginTop: '320%',
+        marginLeft: '10%'
     }
 })
 
