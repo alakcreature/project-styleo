@@ -9,6 +9,7 @@ import {
     Image,
     ScrollView
 } from 'react-native';
+import Modal from 'react-native-modal';
 
 //const { Width } = Dimensions.get('window')
 
@@ -62,6 +63,24 @@ function Form(props) {
                 <TouchableOpacity style={[styles.button, { fontWeight: 700 }]} onPress={props.handleSubmit}>
                     <Text style={{ textAlign: 'center', fontFamily: 'sans-serif' }}> Show Me! </Text>
                 </TouchableOpacity>
+                <Modal
+                    isVisible={props.visibleModal === 1}
+                    backdropColor={'white'}
+                    backdropOpacity={0.3}
+                    backdropOpacity={1}
+                    coverScreen={true}
+                    animationIn={'zoomInDown'}
+                    animationOut={'zoomOutUp'}
+                    animationInTiming={1000}
+                    animationOutTiming={1000}
+                    backdropTransitionInTiming={1000}
+                    backdropTransitionOutTiming={1000}
+                >
+                    <View style={styles.modalContent}>
+                        <Image source={require('../assets/829.gif')} style={{ width: 50, height: 50 }} />
+                    </View>
+                </Modal>
+
 
 
 
@@ -90,34 +109,36 @@ function Form(props) {
                             if (r.jeans) {
                                 return (
                                     <View key={i} style={{ fontFamily: 'sans-serif' }}>
-                                        <Text style={{ fontWeight: '700' }}>
+                                        <Text style={{ fontSize: 21, fontWeight: '700' }}>
                                             According to choice of your body structure,skin complexion and height , here are some suggestions from our side to look for.
                                     </Text>
-                                        <Text style={{ marginTop: 5 }}>
+                                        <Text style={{ fontSize: 21, marginTop: 5 }}>
                                             During {r.name}, you should go for {r.tee} coloured tee's with {r.jeans} jeans.
                                     </Text>
-                                        <Text style={{ marginTop: 18, backgroundColor: 'red', fontWeight: 'bold', fontSize: 20, fontFamily: 'Roboto' }}>What to persue :</Text>
+                                        <Text style={{ marginTop: 18, backgroundColor: 'transparent', fontWeight: 'bold', fontSize: 23, fontFamily: 'Roboto' }}>
+                                            What to persue :
+                                    </Text>
                                     </View>)
                             }
                             if (r.field == 'figure') {
                                 return (
-                                    <View key={i} style={{ backgroundColor: 'red' }} >
-                                        <Text>With your {r.name} figure, we think that {r.use} tee's might go well along with {r.avoid} on your tee.(although its optional).</Text>
+                                    <View key={i} style={{ backgroundColor: 'transparent', marginTop: 4 }} >
+                                        <Text style={{ fontSize: 21 }}>With your <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.name}</Text> figure, we think that <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.use}</Text> tee's might go well along with <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.avoid}</Text> on your tee.(although its optional).</Text>
                                     </View>
                                 )
                             }
                             if (r.field == 'skin') {
                                 return (
-                                    <View key={i} style={{ backgroundColor: 'red' }} >
-                                        <Text>Apart from your physique, your skin complexion also plays a vital role in your dressing style.</Text>
-                                        <Text>According to your choice, we suggest you to have tee's of {r.use} and try to avoid {r.avoid} tee's.</Text>
+                                    <View key={i} style={{ fontSize: 24, backgroundColor: 'transparent', marginTop: 4 }} >
+                                        <Text style={{ fontSize: 21 }}>Apart from your physique, your skin complexion also plays a vital role in your dressing style.</Text>
+                                        <Text style={{ fontSize: 21 }}>According to your choice, we suggest you to have tee's of <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.use}</Text> and try to avoid <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.avoid}</Text> tee's.</Text>
                                     </View>
                                 )
                             }
                             if (r.field == 'height') {
                                 return (
-                                    <View key={i} style={{ backgroundColor: 'red' }} >
-                                        <Text>And with your height try to have {r.use} tee and try to avoid {r.avoid} tee.</Text>
+                                    <View key={i} style={{ backgroundColor: 'transparent', marginTop: 4 }} >
+                                        <Text style={{ fontSize: 21 }}>And with your height try to have <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.use}</Text> tee and try to avoid <Text style={{ fontSize: 22, fontWeight: '700' }}>{r.avoid}</Text> tee.</Text>
                                     </View>
                                 )
                             }
@@ -129,38 +150,20 @@ function Form(props) {
     }
 
 }
-/*{
-                    props.data.map((r, i) => {
-                        if (r.jeans) {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.jeans}</Text>
-                                    <Text>{r.tee}</Text>
-                                </View>)
-                        }
-                        else {
-                            return (
-                                <View key={i}>
-                                    <Text>{r.avoid}</Text>
-                                    <Text>{r.use}</Text>
-                                    <Text>{r.optional}</Text>
-                                </View>
-                            )
-                        }
-                    }
-                    )}*/
 const styles = StyleSheet.create({
     regform: {
-        marginTop: '85%',
-        marginLeft: '25%',
+        flex: 1,
+
+        marginTop: '90%',
+        marginLeft: '35%',
         width: '58%',
-        height: 340,
         backgroundColor: "transparent"
 
     },
     picker: {
-        backgroundColor: 'transparent',
-        margin: 2.5,
+        backgroundColor: 'yellow',
+        opacity: 0.5,
+        marginTop: 2.5,
         width: '40%',
         height: '55%'
     },
@@ -170,12 +173,18 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50,
         borderBottomRightRadius: 50,
         marginLeft: 10,
-        margin: 20,
+        marginTop: 20,
         width: 125,
         paddingLeft: 1,
         height: 35,
         justifyContent: 'center',
         backgroundColor: 'brown'
+    },
+    modalContent: {
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     outform: {
         width: '100%',
@@ -186,7 +195,7 @@ const styles = StyleSheet.create({
     comp1: {
         marginTop: '30%',
         margin: 2,
-        backgroundColor: 'white',
+        backgroundColor: 'yellow',
         borderRadius: 18,
         width: '67%',
         height: '70%',

@@ -4,19 +4,20 @@ import axios from 'axios';
 import Form from './Form';
 import { Video } from 'expo-av';
 
-const url = 'https://scontent-bom1-2.cdninstagram.com/vp/67dd0194857ec03b7e0647e0205358d7/5DB84F8B/t51.2885-15/e35/30087453_2042320109364749_548429265993990144_n.jpg?_nc_ht=scontent-bom1-2.cdninstagram.com'
+//const url = 'https://scontent-bom1-2.cdninstagram.com/vp/67dd0194857ec03b7e0647e0205358d7/5DB84F8B/t51.2885-15/e35/30087453_2042320109364749_548429265993990144_n.jpg?_nc_ht=scontent-bom1-2.cdninstagram.com'
 const { height } = Dimensions.get("window");
 
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            seasonname: 'winter',
-            figurename: 'slim',
-            skinname: 'dark',
-            heightname: 'large',
+            seasonname: '',
+            figurename: '',
+            skinname: '',
+            heightname: '',
             data: [],
-            queryResponse: false
+            queryResponse: false,
+            visibleModal: null
         },
             this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -42,11 +43,13 @@ class Home extends Component {
 
     handleSubmit() {
         let queryData = this.state
-        console.log(queryData)
-        axios.post('https://project-styleo2.herokuapp.com/query', queryData)
+        this.setState({ visibleModal: 1 })
+        axios.post('https://project-styleo.herokuapp.com/query', queryData)
             .then((res) => {
                 this.setState({ data: res.data, queryResponse: true })
-                console.log(this.state.queryResponse)
+                //console.log(this.state.data)
+                this.setState({ visibleModal: null })
+
             })
             .catch(err => console.log(err));
     }
@@ -62,10 +65,19 @@ class Home extends Component {
                     />*/
 
     render() {
-        const { queryResponse, data, seasonname, figurename, skinname, heightname } = this.state;
+        const { visibleModal, queryResponse, data, seasonname, figurename, skinname, heightname } = this.state;
         return (
             <SafeAreaView style={styles.container}>
-
+                <Video
+                    source={require('../assets/fashion.mp4')}
+                    rate={1.0}
+                    volume={1.0}
+                    isMuted
+                    resizeMode="cover"
+                    shouldPlay
+                    isLooping
+                    style={styles.backgroundVideo}
+                />
                 <Form
                     SeasonPickerHolder={seasonname}
                     FigurePickerHolder={figurename}
@@ -78,6 +90,7 @@ class Home extends Component {
                     handleSubmit={this.handleSubmit}
                     data={data}
                     queryResponse={queryResponse}
+                    visibleModal={visibleModal}
 
                 />
             </SafeAreaView>
@@ -91,7 +104,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: 'red'
+        backgroundColor: 'transparent'
     },
     backgroundVideo: {
         height: height,
