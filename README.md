@@ -3,7 +3,7 @@ Styleo is an app which can suggest you a good fashion sense.
 
 # Installation via apk
 Go through the link below and download the app to enjoy our service.
-https://expo.io/artifacts/0cfaf565-742a-4fe2-b861-85b1f4d0ed7e
+https://expo.io/artifacts/683416e2-72e5-478a-99d4-c8edf06439d3
 
 # If above link apk is not working or For Development Purpose.
 Clone this Repository
