@@ -21,27 +21,6 @@ router.post('/', (req,res) => {
     .catch((err)=> {
         error: err
     })
-    /*Season.find({name : req.body.name})
-    .populate('figure')                         //.populate('skin_complexion')  //.populate('height')
-    .exec()
-    .then(respons => {
-        //console.log(response)
-        const response = {
-            season: respons.map(res1 =>{
-                return {
-                    name: res1.name,
-                    jeans: res1.jeans,
-                    tee: res1.tee,
-                    figure: res1.figure
-
-                }
-            })
-        }
-        res.status(200).json(response);
-    })
-    .catch(err => res.status(500).json({
-        Error: err
-    }));*/
 
 });
 
